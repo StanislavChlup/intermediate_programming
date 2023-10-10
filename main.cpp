@@ -33,5 +33,9 @@ int main(){
         std::cout << a << ", " << b << std::endl;
         fibonacci(a,b);
     } */
-Vector2 l{10,6};Vector2 m{6,7};printVector2(sumVector2(l,m));printVector2(diffVector2(l,m));return 0;
+    Vector2 l{10,6};
+    Vector2 m{6,7};
+    printVector2(sumVector2(l,m));
+    printVector2(diffVector2(l,m));
+    return 0;
 }

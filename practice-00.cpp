@@ -18,16 +18,47 @@
 
 using Set = std::uint64_t;
 
-void addToSet(Set&, unsigned);
-void removeFromSet(Set&, unsigned);
-bool contains(const Set&, unsigned);
-void printSet(const Set&);
-Set setUnion(const Set&, const Set&);
-Set setIntersection(const Set&, const Set&);
-Set setSymmetricDifference(const Set&, const Set&);
-bool isEmpty(const Set&);
-bool isSubset(const Set&, const Set&);
-bool areEqual(const Set&, const Set&);
+void addToSet(Set& set, unsigned int n){
+    set |= 1ULL << n;
+}
+void removeFromSet(Set& set, unsigned int n){
+    set &= ~(1ULL << n);
+}
+bool contains(const Set& set, unsigned int n){
+    return set & (1ULL << n);
+}
+void printSet(const Set& set){
+    std::cout << "{";
+    bool isFirst = true;
+    for(int i = 0; i < 64; i++){
+       if(contains(set, i)) {
+        if(isFirst) {   
+            std::cout << i;
+            isFirst = false;
+        }
+        else std::cout << ", " << i;
+       }
+    }
+    std::cout << "}" << std::endl;
+}
+Set setUnion(const Set& set1, const Set& set2){
+    return set1 | set2;
+}
+Set setIntersection(const Set& set1, const Set& set2){
+    return set1 & set2;
+}
+Set setSymmetricDifference(const Set& set1, const Set& set2){
+    return set1 ^ set2;
+}
+bool isEmpty(const Set& set){
+    return set == 0;
+}
+bool isSubset(const Set& set1, const Set& set2){
+    return setUnion(set1,set2) == set2;
+}
+bool areEqual(const Set& set1, const Set& set2){
+    return set1 == set2;
+}
 
 int main() {
     Set a = 0;

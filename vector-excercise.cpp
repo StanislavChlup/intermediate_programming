@@ -31,16 +31,44 @@ using Instructions = std::vector<Move>;
  * 3. Napište overload funkce move, která dostane pokyny typu Instructions a skladiště typu Storage a provede všechny přesuny.
  */
 
-void show(const Storage& storage);
-void move(const Move& move, Storage& storage);
-void move(const Instructions& instructions, Storage& storage);
+void show(const Storage& storage){
+    unsigned int max = 0;
+    for(unsigned int i = 0; i < storage.size(); i++){
+        max = storage[i].size() > max ? storage[i].size() : max;
+    }
+    unsigned int it = max;
+    for(int len = max-1; len >= 0; len--){
+        for(unsigned int i = 0; i < storage.size(); i++){
+            if(storage[i].size() >= it){
+                std::cout << "[" <<storage[i][len] << "] ";
+            } else {
+                std::cout << "    ";
+            }
+        }
+        it--;
+        std::cout << std::endl;
+    }
+    for(unsigned int i = 0; i < storage.size(); i++){
+        std::cout << " " << i << "  ";
+    }
+    std::cout << std::endl << std::endl;
+}
+void move(const Move& move, Storage& storage){
+    storage[move.to].push_back(storage[move.from].back());
+    storage[move.from].pop_back();
+}
+void move(const Instructions& instructions, Storage& storage){
+    for(unsigned int i = 0; i < instructions.size(); i++){
+        move(instructions[i], storage);
+    }
+}
 
 int main()
 {
     Storage storage = {
         { 0, 1, 2, 3, 4, 5 },
         {},
-        {}
+        {},
     };
 
     Instructions instructions = {
@@ -52,10 +80,8 @@ int main()
         { 2, 1 },
         { 0, 1 },
     };
-
     show(storage);
     move(instructions, storage);
     show(storage);
-
     return 0;
 }

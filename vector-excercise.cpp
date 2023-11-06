@@ -83,5 +83,6 @@ int main()
     show(storage);
     move(instructions, storage);
     show(storage);
+    
     return 0;
 }

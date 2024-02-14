@@ -66,12 +66,15 @@ void setP(std::vector<std::uint8_t>& vec, const Person& p, size_t index){
 };
 
 
+std::vector<std::uint16_t> 
+
+
 int main(){
     std::vector<std::uint8_t> memory(256,0);
 
     Person p({0x12, 0x50, 0x07e8});
     setP(memory, p, 0);
     Person p2 = getP(memory, 0);
-   std::cout << (int)p2.age << ", " << (int)p2.weight << ", " << (int)p2.birth << std::endl;
+    std::cout << (int)p2.age << ", " << (int)p2.weight << ", " << (int)p2.birth << std::endl;
 }
 

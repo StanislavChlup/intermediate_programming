@@ -1,0 +1,22 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "g++",
+      "args": [
+        "-g",
+        "-w",
+        "${file}",
+        "-o",
+        "${fileDirname}/${fileBasenameNoExtension}"
+        //"-lSDL2" // Link with SDL2
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

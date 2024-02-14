@@ -66,7 +66,28 @@ void setP(std::vector<std::uint8_t>& vec, const Person& p, size_t index){
 };
 
 
-std::vector<std::uint16_t> 
+std::vector<std::uint16_t> tou16vec(const std::vector<std::uint8_t>& vec){
+    std::vector<std::uint16_t> out(vec.size()/2,0);
+    for(int i = 0; i < out.size(); i++){
+        out[i] = getu16(vec, i * 2);
+    }
+    return out;
+}
+
+std::vector<std::uint32_t> tou32vec(const std::vector<std::uint8_t>& vec){
+    std::vector<std::uint32_t> out(vec.size()/4,0);
+    for(int i = 0; i < out.size(); i++){
+        out[i] = getu32(vec, i * 4);
+    }
+    return out;
+}
+std::vector<std::uint64_t> tou64vec(const std::vector<std::uint8_t>& vec){
+    std::vector<std::uint64_t> out(vec.size()/8,0);
+    for(int i = 0; i < out.size(); i++){
+        out[i] = getu64(vec, i * 8);
+    }
+    return out;
+}
 
 
 int main(){
@@ -76,5 +97,9 @@ int main(){
     setP(memory, p, 0);
     Person p2 = getP(memory, 0);
     std::cout << (int)p2.age << ", " << (int)p2.weight << ", " << (int)p2.birth << std::endl;
+    std::vector<std::uint16_t> res16 = tou16vec(memory);
+    std::vector<std::uint32_t> res32 = tou32vec(memory);
+    std::vector<std::uint64_t> res64 = tou64vec(memory);
+    int a = 0;
 }
 
